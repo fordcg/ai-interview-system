@@ -1,0 +1,126 @@
+version: '3.8'
+
+services:
+  # MySQL数据库服务
+  database:
+    image: mysql:8.0
+    container_name: interview_mysql_prod
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-InterviewSystem2024!}
+      MYSQL_DATABASE: interview_system
+      MYSQL_USER: interview_user
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-InterviewPass2024!}
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - interview_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # 后端Flask服务
+  backend:
+    image: ghcr.io/${GITHUB_REPOSITORY:-fordcg/ai-interview-system}/backend:latest
+    container_name: interview_backend_prod
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - DATABASE_URL=mysql://interview_user:${MYSQL_PASSWORD:-InterviewPass2024!}@database:3306/interview_system
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=${SECRET_KEY:-your-production-secret-key-change-this}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-jwt-secret-key-change-this}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - XUNFEI_APP_ID=${XUNFEI_APP_ID}
+      - XUNFEI_API_KEY=${XUNFEI_API_KEY}
+      - XUNFEI_API_SECRET=${XUNFEI_API_SECRET}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./merged-project-flask/uploads:/app/uploads
+      - ./merged-project-flask/logs:/app/logs
+      - ./merged-project-flask/models:/app/models
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - interview_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      timeout: 10s
+      retries: 5
+      interval: 30s
+      start_period: 40s
+
+  # Redis缓存服务
+  redis:
+    image: redis:6.2-alpine
+    container_name: interview_redis_prod
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - interview_network
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-}
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 10s
+      retries: 5
+      interval: 30s
+
+  # 前端Vue服务
+  frontend:
+    image: ghcr.io/${GITHUB_REPOSITORY:-fordcg/ai-interview-system}/frontend:latest
+    container_name: interview_frontend_prod
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - interview_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      timeout: 10s
+      retries: 5
+      interval: 30s
+
+  # Nginx反向代理
+  nginx:
+    image: nginx:alpine
+    container_name: interview_nginx_prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - interview_network
+
+# 网络配置
+networks:
+  interview_network:
+    driver: bridge
+
+# 数据卷配置
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local

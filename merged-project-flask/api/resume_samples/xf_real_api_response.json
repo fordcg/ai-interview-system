@@ -1,0 +1,17 @@
+{
+  "header": {
+    "code": 0,
+    "message": "success",
+    "sid": "ase000fe2e3@hu197fdb5db5f05c4882"
+  },
+  "payload": {
+    "resData": {
+      "compress": "raw",
+      "encoding": "utf8",
+      "format": "json",
+      "seq": "0",
+      "status": "3",
+      "text": "eyJsaW5rcyI6W3siaW1nX3VybCI6Imh0dHBzOi8vc3RhdGljcy56Y21pbWEuY24vdXBsb2Fkcy9yZXN1bWUvY292ZXIvMjAyNTA3MTIvMTRmZDU4NGYtNmI1MC00N2RlLTg4ZjItYTViMTZiNDMxMzU4LmpwZyIsIndvcmRfdXJsIjoiaHR0cHM6Ly9maWxlLmR1aHVpdGVjaC5jb20vby85YjdiM2E1NjM4NTcyMWViNmNiOGY1YWVhNmE4OGI4OTYvNDIxZDA5MjktZDU0MS00N2U0LWEyNmUtYzFiZDIxOGQ2OWYwLmRvY3gifSx7ImltZ191cmwiOiJodHRwczovL3N0YXRpY3MuemNtaW1hLmNuL3VwbG9hZHMvcmVzdW1lL2NvdmVyLzIwMjUwNzEyL2U2MTFhY2ExLTIxYTQtNGNmZS04Y2VjLTJkODljMDZkODk2Zi5qcGciLCJ3b3JkX3VybCI6Imh0dHBzOi8vZmlsZS5kdWh1aXRlY2guY29tL28vZmUzYWUxYjc3ODM2YmY3NzdjODI0MDNkMGNlYTI0M2E3LzU4MzYzMjA5LTgwYTgtNDljMi1hMzEzLTI1NDYzZTE1NTkwYi5kb2N4In0seyJpbWdfdXJsIjoiaHR0cHM6Ly9zdGF0aWNzLnpjbWltYS5jbi91cGxvYWRzL3Jlc3VtZS9jb3Zlci8yMDI1MDcxMi8wNDM3ODZiNS1mMWUwLTRmODYtOTFmZi0zZDBjNTU0NjRiY2UuanBnIiwid29yZF91cmwiOiJodHRwczovL2ZpbGUuZHVodWl0ZWNoLmNvbS9vL2NhODNhNmFlNWU5MzNjYjI0M2Q4MzFlM2NhMTNjYzM3NC9mMjY4ZjI3NC1iMTI3LTRlYjAtYWFjNy1lZTBkZTI3NmYwNWEuZG9jeCJ9XX0="
+    }
+  }
+} 

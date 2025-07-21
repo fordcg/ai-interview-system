@@ -1,0 +1,464 @@
+/* 全局样式 */
+:root {
+    /* 基础颜色 - 基于T.config.js的HSL颜色系统 */
+    --primary: hsl(221.2, 83.2%, 53.3%);
+    --secondary: hsl(240, 5.9%, 10%);
+    --accent: hsl(240, 4.8%, 95.9%);
+    --success: hsl(142.1, 76.2%, 36.3%);
+    --warning: hsl(38, 92%, 50%);
+    --destructive: hsl(0, 84.2%, 60.2%);
+    --light: hsl(0, 0%, 98%);
+    --dark: hsl(240, 10%, 3.9%);
+    --gray: hsl(240, 3.8%, 46.1%);
+    
+    /* 背景和卡片 */
+    --bg-gradient: linear-gradient(135deg, hsl(240, 10%, 3.9%), hsl(240, 5.9%, 10%), hsl(240, 5.9%, 15%));
+    --card-bg: hsl(var(--background) / 0.08);
+    --card-border: hsl(var(--border) / 0.1);
+    
+    /* 组件颜色 */
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 4.9% 83.9%;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    
+    /* 主色调 */
+    --primary-foreground: 210 40% 98%;
+    
+    /* 次要色调 */
+    --secondary-foreground: 0 0% 98%;
+    
+    /* 强调色 */
+    --accent-foreground: 240 5.9% 10%;
+    
+    /* 状态颜色 */
+    --destructive-foreground: 0 0% 98%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    
+    /* 组件颜色 */
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    /* 侧边栏颜色 */
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 217.2 91.2% 59.8%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 215 20.2% 65.1%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    --sidebar-border: 216 34% 17%;
+    --sidebar-ring: 224 76% 48%;
+    
+    /* 圆角 */
+    --radius: 0.5rem;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans SC', 'Segoe UI', sans-serif;
+    background: #F5F7FA;
+    color: #333333;
+    line-height: 1.6;
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+/* 卡片样式 */
+.custom-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+}
+
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* 按钮样式 */
+.custom-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.custom-btn-primary {
+    background: linear-gradient(45deg, var(--primary), var(--accent)) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-btn-primary:hover {
+    background: linear-gradient(45deg, var(--secondary), var(--primary)) !important;
+    box-shadow: 0 8px 20px rgba(67, 97, 238, 0.6) !important;
+    transform: translateY(-3px);
+}
+
+.custom-btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.custom-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+/* 现代导航栏样式 */
+.modern-navbar {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Logo样式 */
+.custom-logo-text {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--success), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* 标题样式 */
+.gradient-text {
+    background: linear-gradient(to right, var(--success), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+/* 分割线 */
+.divider-light {
+    border-color: var(--card-border);
+}
+
+/* 透明列表 */
+.transparent-list {
+    background: transparent !important;
+}
+
+/* 页面容器 */
+.page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 页面标题 */
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* 面包屑导航 */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumb-item {
+    margin: 0 4px;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(76, 201, 240, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(76, 201, 240, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(76, 201, 240, 0.3); }
+}
+
+/* 应用动画的类 */
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.slide-up {
+    animation: slideInUp 0.3s ease forwards;
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+.float-animation {
+    animation: float 6s ease-in-out infinite;
+}
+
+.glow-animation {
+    animation: glow 3s infinite;
+}
+
+/* 延迟类 */
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.delay-3 {
+    animation-delay: 0.6s;
+}
+
+.delay-4 {
+    animation-delay: 0.8s;
+}
+
+.delay-5 {
+    animation-delay: 1s;
+}
+
+/* 标准UI效果 */
+.standard-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 毛玻璃效果 */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+/* 霓虹文字效果 */
+.neon-text {
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 
+                 0 0 10px #fff, 
+                 0 0 15px var(--primary), 
+                 0 0 20px var(--primary), 
+                 0 0 25px var(--primary);
+}
+
+/* 渐变边框 */
+.gradient-border {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 15px;
+    z-index: 1;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary), var(--accent), var(--success));
+    border-radius: 17px;
+    z-index: -1;
+}
+
+/* 3D卡片效果 */
+.card-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.card-3d:hover .card-3d-inner {
+    transform: rotateY(10deg) rotateX(5deg);
+}
+
+.card-3d-inner {
+    transition: transform 0.6s ease;
+}
+
+/* 波浪效果 */
+.wave-animation {
+    position: relative;
+    overflow: hidden;
+}
+
+.wave-animation::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: wave 2s linear infinite;
+}
+
+@keyframes wave {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* 打字机效果 */
+.typewriter {
+    overflow: hidden;
+    border-right: 3px solid var(--accent);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--accent) }
+}
+
+/* 鼠标悬停图片缩放 */
+.zoom-on-hover {
+    transition: transform 0.5s ease;
+    overflow: hidden;
+}
+
+.zoom-on-hover:hover img {
+    transform: scale(1.1);
+}
+
+.zoom-on-hover img {
+    transition: transform 0.5s ease;
+}
+
+/* 闪光按钮效果 */
+.shine-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.shine-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* 页面过渡效果 */
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.page-enter,
+.page-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .custom-logo-text {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* 文本样式，提高可读性 */
+.text-shadow {
+    text-shadow: none;
+}
+
+/* 深色文本 */
+.light--text {
+    color: #333333 !important;
+}
+
+/* 增强文本可读性的背景 */
+.readable-bg {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* 增强卡片文本可读性 */
+.v-card__text {
+    color: #333333 !important;
+}
+
+/* 增强列表项文本可读性 */
+.v-list-item__title {
+    color: #333333 !important;
+}
+
+/* 增强标题可读性 */
+.v-card__title {
+    color: #333333 !important;
+} 
